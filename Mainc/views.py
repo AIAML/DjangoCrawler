@@ -13,9 +13,11 @@ class MainView(View):
         return render(request, self.template_name, context)
     def post(self, request, *args, **kwargs):
         context = {}
-        urltext = request.POST.get('urltext')
-        #urltext = request.POST['urltext']
-        urltag = request.POST['urltag']
+        if request.method == 'POST':
+            passed_data = request.POST
+            urltext = request.POST.get('urltext')
+            #urltext = request.POST['urltext']
+            urltag = request.POST['urltag']
 
         url = urltext
         headers = {
