@@ -9,7 +9,7 @@ class MainView(View):
     template_name = "Main_page.html"
     def get(self, request, *args, **kwargs):
         context = {}
-
+        context['urltag'] = 'Nothing to display'
         return render(request, self.template_name, context)
     def post(self, request, *args, **kwargs):
         context = {}
@@ -25,6 +25,12 @@ class MainView(View):
         }
         f = requests.get(url, headers=headers)
         soup = BeautifulSoup(f.content, 'lxml')
+        allv = ""
         for title in soup.find_all(urltag):
-            print(title.get_text())
+            allv = allv + title.get_text()
+
+        resp = requests.get(url)
+        print(resp.status_code)
+        #print(resp.text)
+        context['urltag'] = allv
         return render(request, self.template_name, context)
