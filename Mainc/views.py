@@ -16,9 +16,8 @@ class MainView(View):
         if request.method == 'POST':
             passed_data = request.POST
             urltext = request.POST.get('urltext')
-            #urltext = request.POST['urltext']
             urltag = request.POST['urltag']
-
+            tagclass = request.POST['tagclass']
         url = urltext
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
@@ -26,9 +25,8 @@ class MainView(View):
         f = requests.get(url, headers=headers)
         soup = BeautifulSoup(f.content, 'lxml')
         allv = ""
-        for title in soup.find_all(urltag):
+        for title in soup.find_all(urltag, class_=tagclass):
             allv = allv + title.get_text()
-
         resp = requests.get(url)
         print(resp.status_code)
         #print(resp.text)
