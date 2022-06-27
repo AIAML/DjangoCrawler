@@ -25,8 +25,16 @@ class MainView(View):
         f = requests.get(url, headers=headers)
         soup = BeautifulSoup(f.content, 'lxml')
         allv = ""
-        for title in soup.find_all(urltag, class_=tagclass):
+        #for title in soup.find_all(urltag, class_=tagclass):
+        for title in soup.find_all(urltag):
             allv = allv + title.get_text()
+
+
+        img = soup.find_all(urltag)
+        for each in img:
+            allv = allv + '-----' +each.get('src')
+
+
         resp = requests.get(url)
         print(resp.status_code)
         #print(resp.text)
