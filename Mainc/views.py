@@ -35,6 +35,7 @@ class MainView(View):
             allv = allv + '-----' +each.get('src')
 
 
+
         resp = requests.get(url)
         print(resp.status_code)
         #print(resp.text)
