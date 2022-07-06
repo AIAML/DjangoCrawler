@@ -29,12 +29,9 @@ class MainView(View):
         for title in soup.find_all(urltag):
             allv = allv + title.get_text()
 
-
         img = soup.find_all(urltag)
         for each in img:
             allv = allv + '-----' +each.get('src')
-
-
 
         resp = requests.get(url)
         print(resp.status_code)
