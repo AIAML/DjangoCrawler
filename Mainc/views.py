@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from xlwt import *
 
 class MainView(View):
-    template_name = "Main_page.html"
+    template_name = "Link_Actions.html"
     def get(self, request, *args, **kwargs):
         context = {}
         context['urltag'] = 'Nothing to display'
