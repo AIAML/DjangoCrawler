@@ -5,6 +5,42 @@ import lxml
 from bs4 import BeautifulSoup
 from xlwt import *
 
+class ImageView(View):
+    template_name = "Image_page.html"
+    def get(self, request, *args, **kwargs):
+        context = {}
+        context['urltag'] = 'Nothing to display'
+        return render(request, self.template_name, context)
+    def post(self, request, *args, **kwargs):
+        context = {}
+        if request.method == 'POST':
+            passed_data = request.POST
+            urltext = request.POST.get('urltext')
+        if  len(urltext) > 5:
+            url = urltext
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+            }
+            f = requests.get(url, headers=headers)
+            soup = BeautifulSoup(f.content, 'lxml')
+            allv = ""
+            items = {}
+            counter = 0
+            img = soup.find_all("img")
+            for each in img:
+                allv = allv + '-----' +each.get('src')
+                items[counter] = each.get('src')
+                counter= (counter + 1)
+
+            resp = requests.get(url)
+            print(resp.status_code)
+            context['urltag'] = allv
+            context['images'] = items
+        else:
+            context['urltag'] = ""
+            context['images'] = ""
+        return render(request, self.template_name, context)
+
 class MainView(View):
     template_name = "Link_Actions.html"
     def get(self, request, *args, **kwargs):
