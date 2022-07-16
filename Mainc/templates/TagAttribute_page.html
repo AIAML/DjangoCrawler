@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <form method="post"> {% csrf_token %}
+          <div class="form-group">
+            <label>Url Address</label>
+            <input type="url" class="form-control" id="urltext" name="urltext" aria-describedby="eurltextHelp" placeholder="Enter Url">
+          </div>
+          <div class="form-group">
+            <label>Specific Tag</label>
+            <input type="text" class="form-control" id="urltag" name="urltag" aria-describedby="urltagHelp" placeholder="Enter Tag">
+          </div>
+          <div class="form-group">
+            <label>Specific Attribute</label>
+            <input type="text" class="form-control" id="tagattribute" name="tagattribute" aria-describedby="urltagHelp" placeholder="Enter Attribute">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Get Specific Tag And attribute" >
+        </form>
+        <div class="row">
+            <p>
+                {{ urltag }}
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
