@@ -70,6 +70,51 @@ class AhrefView(View):
         context['urltag'] = allv
         return render(request, self.template_name, context)
 
+class HeadingView(View):
+    template_name = "Heading_page.html"
+    def get(self, request, *args, **kwargs):
+        context = {}
+        context['urltag'] = 'Nothing to display'
+        return render(request, self.template_name, context)
+    def post(self, request, *args, **kwargs):
+        context = {}
+        if request.method == 'POST':
+            passed_data = request.POST
+            urltext = request.POST.get('urltext')
+        url = urltext
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+        }
+        f = requests.get(url, headers=headers)
+        soup = BeautifulSoup(f.content, 'lxml')
+        allv = ""
+        for title in soup.find_all('h1'):
+            try:
+                allv = allv +  " H1 - " + title.get_text() + " --- "
+            except:
+                allv = allv + "-"
+        for title in soup.find_all('h2'):
+            try:
+                allv = allv +  " H2 - " + title.get_text() + "---"
+            except:
+                allv = allv + "-"
+        for title in soup.find_all('h3'):
+            try:
+                allv = allv +  " H3 - " + title.get_text() + "---"
+            except:
+                allv = allv + "-"
+
+        for title in soup.find_all('h4'):
+            try:
+                allv = allv +  " H4 - " + title.get_text() + "---"
+            except:
+                allv = allv + "-"
+
+        resp = requests.get(url)
+        print(resp.status_code)
+        context['urltag'] = allv
+        return render(request, self.template_name, context)
+
 class ReadTagView(View):
     template_name = "Tag_page.html"
     def get(self, request, *args, **kwargs):
