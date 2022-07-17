@@ -177,6 +177,35 @@ class TagAttributeView(View):
         context['urltag'] = allv
         return render(request, self.template_name, context)
 
+class ReadWordPressPricesView(View):
+    template_name = "ReadWordPressPrices_page.html"
+    def get(self, request, *args, **kwargs):
+        context = {}
+        context['urltag'] = 'Nothing to display'
+        return render(request, self.template_name, context)
+    def post(self, request, *args, **kwargs):
+        context = {}
+        if request.method == 'POST':
+            passed_data = request.POST
+            urltext = request.POST.get('urltext')
+        url = urltext
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+        }
+        f = requests.get(url, headers=headers)
+        soup = BeautifulSoup(f.content, 'lxml')
+        allv = ""
+        for title in soup.find_all('span', class_="woocommerce-Price-amount amount"):
+            try:
+                allv = allv + title.get_text()
+            except:
+                allv = allv + "-"
+
+        resp = requests.get(url)
+        print(resp.status_code)
+        context['urltag'] = allv
+        return render(request, self.template_name, context)
+
 
 class MainView(View):
     template_name = "Link_Actions.html"
