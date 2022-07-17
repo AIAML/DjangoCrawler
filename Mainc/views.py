@@ -4,6 +4,7 @@ import requests
 import lxml
 from bs4 import BeautifulSoup
 from xlwt import *
+from woocommerce import API
 
 class ImageView(View):
     template_name = "Image_page.html"
@@ -180,6 +181,17 @@ class TagAttributeView(View):
 class ReadWordPressPricesView(View):
     template_name = "ReadWordPressPrices_page.html"
     def get(self, request, *args, **kwargs):
+
+        page = 0
+
+        #wcapi = API(
+        #    url="http://janwear.com",
+        #    consumer_key="ck_bfc3cdef23d6bec146d100e1636d2bc5b38f0383",
+        ##    consumer_secret="cs_fd76a496f8a075c927d8690a0711f185c1b07d63",
+        #    timeout=50
+        #)
+        #print(wcapi.get("products").json())
+
         context = {}
         context['urltag'] = 'Nothing to display'
         return render(request, self.template_name, context)
