@@ -1,6 +1,6 @@
 # Django Crawler
 
-In this application you surf a specific web page based on:
+In this application you surfe a specific web page based on:
   - Image links
   - Hyper links
   - Tags
