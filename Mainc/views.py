@@ -242,3 +242,43 @@ class MainView(View):
         #print(resp.text)
         context['urltag'] = allv
         return render(request, self.template_name, context)
+
+class ReadSitemapView(View):
+    template_name = "ReadSitemap_page.html"
+    def get(self, request, *args, **kwargs):
+        context = {}
+        context['urltag'] = 'Nothing to display'
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        context = {}
+        if request.method == 'POST':
+            passed_data = request.POST
+            urltext = request.POST.get('urltext')
+            urltag = request.POST['urltag']
+            tagattribute = request.POST['tagattribute']
+        url = urltext
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+        }
+
+
+        xmlDict = {}
+
+        r = requests.get(url)
+        xml = r.text
+
+        soup = BeautifulSoup(xml)
+        sitemapTags = soup.find_all("sitemap")
+
+        print
+        "The number of sitemaps are {0}".format(len(sitemapTags))
+
+        for sitemap in sitemapTags:
+            xmlDict[sitemap.findNext("loc").text] = sitemap.findNext("lastmod").text
+
+        print(xmlDict)
+
+
+        context['urltag'] = xmlDict
+        return render(request, self.template_name, context)

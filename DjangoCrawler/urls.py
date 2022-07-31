@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from Mainc.views import MainView,ImageView,ReadTagView,TagAttributeView,AhrefView,HeadingView,ReadWordPressPricesView
+from Mainc.views import MainView,ImageView,ReadTagView,TagAttributeView,AhrefView,HeadingView,ReadWordPressPricesView,ReadSitemapView
 from django.conf.urls import url
 
 urlpatterns = [
@@ -12,6 +12,9 @@ urlpatterns = [
     path('/ReadWordPressPrices', ReadWordPressPricesView.as_view(),name='Ahref'),
     path('/ReadByTag', ReadTagView.as_view(),name='ReadByTag'),
     path('/ReadByTagAttribute', TagAttributeView.as_view(),name='TagAttributeView'),
+    path('/ReadSitemap', ReadSitemapView.as_view(),name='ReadSitemapView'),
+
+
     url(r'^Mainview/$', MainView.as_view(), name='mainview'),
     url(r'^Image/$', ImageView.as_view(), name='Image'),
     url(r'^Ahref/$', AhrefView.as_view(), name='Ahref'),
@@ -19,5 +22,5 @@ urlpatterns = [
     url(r'^ReadByTagAttribute/$', TagAttributeView.as_view(), name='TagAttributeView'),
     url(r'^Heading/$', HeadingView.as_view(), name='Heading'),
     url(r'^ReadWordPressPrices/$', ReadWordPressPricesView.as_view(), name='Heading'),
-
+    url(r'^ReadSitemap/$', ReadSitemapView.as_view(), name='ReadSitemap'),
 ]

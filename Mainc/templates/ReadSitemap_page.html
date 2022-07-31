@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <form method="post"> {% csrf_token %}
+          <div class="form-group">
+            <label>Url Address</label>
+            <input type="url" class="form-control" id="urltext" name="urltext" aria-describedby="eurltextHelp" placeholder="Enter Url">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Get SiteMap" >
+        </form>
+        <div class="row">
+            <p>
+                {% for key, value in images.items %}
+                     <img src="{{ value }}" width="20%">
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
