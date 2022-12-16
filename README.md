@@ -5,6 +5,6 @@ In this application you surfe a specific web page based on:
   - Hyper links
   - Tags
   - Tags and attributes
-  - worpress site
+  - worpress sites
   Also, A web UI is create for each of these items.
-You have to Activate keys in wordpress in order to use this app.
+You have to Activate keys in wordpress in order to use this application.
