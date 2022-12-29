@@ -6,5 +6,4 @@ In this application you surfe a specific web page based on:
   - Tags
   - Tags and attributes
   - worpress sites
-  Also, A web UI is create for each of these items.
-You have to Activate keys in wordpress in order to use this application.
+  A web UI has been created for each of mentioned items. Also, You have to Activate keys in wordpress in order to use this application.
